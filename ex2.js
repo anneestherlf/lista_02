@@ -1,6 +1,6 @@
 // Versão 1 da função de análise de crédito
 function analisarCredito1() {
-    var compras = [2500, 1200, 800, 100];
+    var compras = [500, 600];
     var totalCompras = compras[0];
     var limite = 5000;
     var status = 'aprovado';
@@ -19,3 +19,5 @@ function analisarCredito1() {
     }
     console.log(`Seu crédito foi ${status}. Saldo disponível: ${saldoDisponivel}.`);
 }
+
+new analisarCredito1(); 
