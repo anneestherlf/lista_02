@@ -1,23 +1,12 @@
-// Versão 1 da função de análise de crédito
-function analisarCredito1() {
-    var compras = [500, 600];
-    var totalCompras = compras[0];
-    var limite = 5000;
-    var status = 'aprovado';
-    var saldoDisponivel = 0;
-    var i = 1;
+// Questão 7
 
-    do {
-        totalCompras += compras[i];
-        i++;
-    } while (limite >= totalCompras && i < compras.length);
+let valorDoPedido = 200;
 
-    saldoDisponivel = limite - totalCompras;
+if (valorDoPedido < 50) {
+    console.log("Frete não disponível!");
+} else if ( 50 <= valorDoPedido && valorDoPedido < 199.99) {
+    console.log("Frete com custo adicional!")
+} else {
+    console.log("Frete grátis!");
+};
 
-    if (saldoDisponivel < 0) {
-        status = 'negado';
-    }
-    console.log(`Seu crédito foi ${status}. Saldo disponível: ${saldoDisponivel}.`);
-}
-
-new analisarCredito1(); 

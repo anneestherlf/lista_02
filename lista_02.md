@@ -235,6 +235,20 @@ Pedidos de R$200,00 ou mais → "Frete grátis!"
 Implemente um pseudocódigo que receba o valor total da compra e exiba a classificação correta do frete para o cliente.
 ______
 
+
+>>> Resposta:
+ ```javascript  
+let valorDoPedido = 200;
+
+if (valorDoPedido < 50) {
+    console.log("Frete não disponível!");
+} else if ( 50 <= valorDoPedido && valorDoPedido < 199.99) {
+    console.log("Frete com custo adicional!")
+} else {
+    console.log("Frete grátis!");
+}
+```
+
 **8)** Considere a implementação da classe base Veiculo em um sistema de modelagem de veículos. Sua tarefa é implementar, utilizando pseudocódigo, as classes derivadas Carro e Moto, que herdam da classe Veiculo, adicionando atributos específicos e métodos para calcular o consumo de combustível de um carro e de uma moto, respectivamente.
 
 ```
