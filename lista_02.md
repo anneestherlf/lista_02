@@ -266,6 +266,41 @@ Implementação genérica para cálculo de consumo, a ser sobrescrita pelas subc
 Agora, implemente as classes Carro e Moto, garantindo que ambas herdem de Veiculo e possuam métodos específicos para calcular o consumo de combustível com base na quilometragem e eficiência do veículo.
 ______
 
+>>> Resposta
+``` javascript
+class Veiculo {
+    constructor(modelo, ano, quilometragem, litros) {
+        this.modelo = modelo;
+        this.ano = ano;
+        this.quilometragem = quilometragem;
+        this.litros = litros;
+    }
+
+    CalcularConsumo() {
+        return this.quilometragem / this.litros; // Retorna o valor diretamente
+    }
+}
+
+class Carro extends Veiculo {
+    constructor(modelo, ano, quilometragem, litros) {
+        super(modelo, ano, quilometragem, litros);
+    }
+}
+
+class Moto extends Veiculo {
+    constructor(modelo, ano, quilometragem, litros) {
+        super(modelo, ano, quilometragem, litros);
+    }
+
+}
+
+const Carro1 = new Carro('Fiat Uno', '1984', 100, 4);
+console.log(Carro1.CalcularConsumo()); // Saída: 25 (km/l)
+
+const Moto1 = new Moto('Honda Biz', '2019', 100, 2);
+console.log(Moto1.CalcularConsumo()); // Saída: 50 (km/l)
+```
+
 **9)** Você é um cientista da NASA e está ajudando no desenvolvimento de um sistema de pouso para sondas espaciais em Marte. Seu objetivo é calcular o tempo necessário para que a sonda reduza sua velocidade até um nível seguro para pouso, considerando uma velocidade inicial de entrada na atmosfera marciana e uma taxa de desaceleração constante causada pelo atrito atmosférico e retrofoguetes.
 
 Entretanto, a sonda não pode ultrapassar um tempo máximo de descida para evitar desvios orbitais, nem pode desacelerar além de um limite mínimo, pois isso poderia causar instabilidade no pouso.
@@ -278,6 +313,34 @@ Considere a fórumla de atualização velocidade:
 ```
 Seu programa deve determinar quanto tempo será necessário para que a sonda atinja uma velocidade segura de pouso, sem ultrapassar os limites estabelecidos.
 ______
+
+>>> Resposta:
+```javascript
+// Constantes
+const velocidadeSegura = 2;          // m/s
+const desaceleracaoMaxima = 15;      // m/s²
+const desaceleracaoMinima = 3;       // m/s²
+const tempoMaximo = 300;             // segundos
+
+// Entradas
+const velocidadeInicial = 540;       // m/s
+const desaceleracao = 10;             // m/s²
+
+// Verificando se a desaceleração está dentro dos limites seguros
+if (desaceleracao < desaceleracaoMinima || desaceleracao > desaceleracaoMaxima) {
+    console.log("ERRO: Desaceleração fora dos limites operacionais!");
+} else {
+    // Calculando o tempo necessário
+    const tempo = (velocidadeInicial - velocidadeSegura) / desaceleracao;
+
+    // Verificando se o tempo ultrapassa o limite máximo
+    if (tempo > tempoMaximo) {
+        console.log("ERRO: Tempo de pouso excede o limite máximo!");
+    } else {
+        console.log(`Tempo necessário para pouso seguro: ${tempo.toFixed(2)} segundos`);
+    }
+}
+```
 
 **10)** Em um sistema de análise financeira, as operações de investimento de uma empresa podem ser representadas por matrizes, onde cada linha representa um tipo de investimento e cada coluna representa um período de tempo.
 
@@ -309,3 +372,66 @@ Escrever("Total de investimentos acumulados:")
 ImprimirMatriz(totalInvestimentos)  
 ```
 Agora, implemente a função MultiplicarMatrizesInvestimento(matrizA, matrizB), que multiplica as duas matrizes, simulando o efeito de diferentes fatores de crescimento e impacto financeiro nos investimentos ao longo do tempo.
+
+>>> Resposta:
+```javascript
+function MultiplicarMatrizesInvestimento(matrizA, matrizB) {
+    // Verificando se as matrizes podem ser multiplicadas
+    if (matrizA[0].length !== matrizB.length) {
+        throw new Error("As matrizes não podem ser multiplicadas. O número de colunas da primeira matriz deve ser igual ao número de linhas da segunda matriz.");
+    }
+
+    const linhasA = matrizA.length;
+    const colunasB = matrizB[0].length;
+    const colunasA = matrizA[0].length;
+    const matrizResultado = [];
+
+    // Calculandocada elemento da matriz resultado
+    for (let i = 0; i < linhasA; i++) {
+        matrizResultado[i] = []; // Inicializando a linha
+        for (let j = 0; j < colunasB; j++) {
+            let soma = 0;
+            for (let k = 0; k < colunasA; k++) {
+                soma += matrizA[i][k] * matrizB[k][j];
+            }
+            matrizResultado[i][j] = soma;
+        }
+    }
+
+    return matrizResultado;
+}
+
+// Função auxiliar para imprimir matrizes formatadas
+function imprimirMatriz(matriz) {
+    console.log("[");
+    for (let linha of matriz) {
+        console.log("  " + JSON.stringify(linha) + ",");
+    }
+    console.log("]");
+}
+
+// Exemplo de uso
+const investimentos = [
+    [1000, 2000],  // Investimentos do tipo 1 nos períodos 1 e 2
+    [1500, 2500]   // Investimentos do tipo 2 nos períodos 1 e 2
+];
+
+const fatoresCrescimento = [
+    [1.1, 1.2],    // Fatores de crescimento para o período 1
+    [0.9, 1.0]     // Fatores de crescimento para o período 2
+];
+
+console.log("Matriz de Investimentos:");
+imprimirMatriz(investimentos);
+
+console.log("\nMatriz de Fatores de Crescimento:");
+imprimirMatriz(fatoresCrescimento);
+
+try {
+    const resultado = MultiplicarMatrizesInvestimento(investimentos, fatoresCrescimento);
+    console.log("\nResultado da Multiplicação (Investimentos × Fatores de Crescimento):");
+    imprimirMatriz(resultado);
+} catch (error) {
+    console.error("\nErro:", error.message);
+}
+```
