@@ -1,4 +1,4 @@
-# Lista 01
+# Lista 02
 ### Anne Figueirôa, T18
 ### Módulo 1, semana 7 e 8
 
